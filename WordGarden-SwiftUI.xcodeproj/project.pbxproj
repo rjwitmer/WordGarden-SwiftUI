@@ -14,6 +14,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CC016A8E2A609F2D00452EF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		CC5FBA322A5764F50002B094 /* WordGarden-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "WordGarden-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC5FBA352A5764F50002B094 /* WordGarden_SwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordGarden_SwiftUIApp.swift; sourceTree = "<group>"; };
 		CC5FBA372A5764F50002B094 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -51,6 +52,7 @@
 		CC5FBA342A5764F50002B094 /* WordGarden-SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				CC016A8E2A609F2D00452EF8 /* Info.plist */,
 				CC5FBA352A5764F50002B094 /* WordGarden_SwiftUIApp.swift */,
 				CC5FBA372A5764F50002B094 /* ContentView.swift */,
 				CC5FBA392A5764F70002B094 /* Assets.xcassets */,
@@ -270,6 +272,7 @@
 				DEVELOPMENT_TEAM = 664FMHC4VF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WordGarden-SwiftUI/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Word Garden";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -300,6 +303,7 @@
 				DEVELOPMENT_TEAM = 664FMHC4VF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "WordGarden-SwiftUI/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Word Garden";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

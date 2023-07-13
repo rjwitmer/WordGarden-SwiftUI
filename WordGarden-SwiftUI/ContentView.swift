@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFAudio
 
 struct ContentView: View {
     @State private var wordsGuessed = 0
@@ -20,10 +21,29 @@ struct ContentView: View {
     @State private var gameStatusMessage = "How Many Guesses to Uncover the Hidden Word?"
     @State private var playAgainHidden = true
     @State private var playAgainButtonLabel = "Another Word?"
+    @State private var audioPlayer: AVAudioPlayer!
     @FocusState private var textFieldIsFocused: Bool
     private let wordsToGuess = ["SWIFT",
                                 "DOG",
-                                "CAT"
+                                "CAT",
+                                "PROGRAMMER",
+                                "CODE",
+                                "BALLET",
+                                "GOLF",
+                                "WORK",
+                                "PLAY",
+                                "VALUE",
+                                "HOME",
+                                "VACATION",
+                                "OCEAN",
+                                "VIEW",
+                                "DOLPHIN",
+                                "BEAR",
+                                "RABBIT",
+                                "SHORT",
+                                "BREAD",
+                                "HUNGRY",
+                                "WALK"
     ]
     private let maximumGuesses = 8
     
@@ -122,6 +142,7 @@ struct ContentView: View {
             Image(imageName)
                 .resizable()
                 .scaledToFit()
+                .animation(.easeIn(duration: 0.75), value: imageName)
             
         }
         .ignoresSafeArea(edges: .bottom)
@@ -156,18 +177,27 @@ struct ContentView: View {
 
         if !wordToGuess.contains(guessedLetter) {
             guessesRemaining -= 1
-            imageName = "flower\(guessesRemaining)"
-        } else {
+            // Animate crumbling leaf and play "incorrect" sound
+            imageName = "wilt\(guessesRemaining)"
+            playSound(soundName: "incorrect")
+            // Delay change to the flower image until after wilt animation is done
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+                imageName = "flower\(guessesRemaining)"
+            }
             
+        } else {    // Play "correct" sound
+            playSound(soundName: "correct")
         }
         // When do we play another word?
         if !revealedWord.contains("_") {    // Guessed when no underscore in the revealed word
             gameStatusMessage = "You've Guessed It! It Took You \(lettersGuessed.count) Guesses to Guess the Word."
+            playSound(soundName: "word-guessed")
             wordsGuessed += 1
             currentWordIndex += 1
             playAgainHidden = false
         } else if guessesRemaining == 0 {   // Word Missed
             gameStatusMessage = "So Sorry. You're All Out of Guesses"
+            playSound(soundName: "word-not-guessed")
             wordsMissed += 1
             currentWordIndex += 1
             playAgainHidden = false
@@ -180,7 +210,21 @@ struct ContentView: View {
         }
         guessedLetter = ""
     }
-    
+    // Function to Play a sound
+    // Requires:    import AVFAudio
+    //              @State private var audioPlayer: AVAudioPlayer!
+    func playSound(soundName: String) {
+        guard let soundFile = NSDataAsset(name: soundName) else {
+            print("😡 Could not read file named \(soundName).")
+            return
+        }
+        do {
+            audioPlayer = try AVAudioPlayer(data: soundFile.data)
+            audioPlayer.play()
+        } catch {
+            print("😡 ERROR: \(error.localizedDescription) creating audioPlayer.")
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
